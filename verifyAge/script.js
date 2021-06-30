@@ -16,7 +16,7 @@ function verificar(){
             if(idade >= 0 && idade < 10){
                 img.setAttribute('src', 'Menino.jpg')
             } else if (idade < 21){
-                //Jovem
+                window.alert('Sua idade ainda não foi configurada, nos perdoe.')
             } else if (idade < 60){
                 img.setAttribute('src', 'AdultoH.jpg')
             } else{ 
