@@ -1,58 +1,97 @@
 *{
-  box-sizing: border-box;
-  max-height: 6rem;
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
 }
-body{
-  background: linear-gradient(to right, #73cee6, #33778a);
+
+.button-popup{
+    display: block;
+    margin: 20px auto;
+    background: crimson;
+    color: white;
+    border: 0;
+    cursor: pointer;
+    padding: 6px 10px;
 }
-.calculator{
-  position: fixed;
-  width: 520px;
-  top: 7%;
-  left: 50%;
+
+.popup-wrapper{
+    display: none;
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
-.numeric{
-  width: 125px;
-  height: 125px;
-  display: inline-block;
-  background: #191a1c;
-  color: #969ea5;
-  font-size: 30px;
-  text-align: center;
-  vertical-align: middle;
-  padding-top: 30px;
-  cursor: pointer;
+
+.popup-close {
+    position: absolute;
+    font-size: 30px;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
 }
-.numeric:active{
-  background: #f0f0f5;
-  color: #191a1c;
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 6.25rem);
+    grid-template-rows: minmax(7.5rem, auto) repeat(5, 6.25rem);
+
+    align-content: center;
+    justify-content: center;
+
+    min-height: 100vh;
 }
-.zero{
-  width: 254px;
+
+.grid-container > .output {
+    grid-column: 1 / -1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-around;
+
+    background: #222;
+
+    padding: 10px;
+
+    word-wrap: break-word;
+    word-break: break-all;
 }
-.action{
-  background: #242529;
+
+.output > .previous-operand {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 1.5rem;
 }
-.result{
-  background: #267e94;
+
+.output > .current-operand {
+    color: #fff;
+    font-size: 2.5rem;
 }
-.visor{
-  width: 512px;
-  height: 150px;
-  background: #f6f7fa;
+
+.grid-container > .twice {
+    grid-column: span 2;
 }
-.total{
-  width: 512px;
-  color: #242529;
-  font-size: 60px;
-  text-align: right;
-  padding-right: 10px;
+
+.grid-container > button {
+    font-size: 2rem;
+    font-weight: bold;
+
+    background-color: #111;
+    color: #eee;
+
+    cursor: pointer;
+
+    border: 1px solid rgba(255, 255, 255, 0.096);
+
+    outline: none;
 }
-.acc{
-  color: #c5c5c5;
-  width: 512px;
-  font-size: 25px;
-  text-align: right;
-  padding-right: 10px;
-  padding-top: 5px;
+
+.grid-container > button:hover {
+    opacity: 0.7;
+}
+
+.grid-container > .operator {
+    background-color: #fec63e;
 }
