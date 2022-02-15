@@ -1,105 +1,76 @@
-let count = []
-let saveAction
+// ONCLICK DO POPUP
 
-const MAX_VISOR_CHAR = 15
+const button = document.querySelector('button')
+const wrapper = document.querySelector('.popup-wrapper')
 
-function addNumber(num){
-  document.getElementById("total").removeAttribute("hidden")
-    if(document.getElementById("total").innerHTML.length < MAX_VISOR_CHAR){
-      document.getElementById("total").innerHTML += num
+button.addEventListener('click', () => {
+    wrapper.style.display = 'block'
+})
+
+wrapper.addEventListener('click', event => {
+    const classNameOfClickedElement = event.target.classList[0]
+    const classNames = ['popup-close', 'popup-wrapper', "grid-container"]
+    const shouldClosePopup = classNames.some(className => className === classNameOfClickedElement)
+
+    if(shouldClosePopup){
+        wrapper.style.display = 'none'
     }
-}
 
-function calcAction(action){
-  var currentNumber = document.getElementById("total").innerHTML
+})
+
+// CALCULADORA
+
+const numberButtons = document.querySelectorAll('[data-number]')
+const operatorButtons = document.querySelectorAll('[data-operator]')
+const equalsButton = document.querySelector('[data-equals]')
+const clearButton = document.querySelector('[data-all-clear]')
+const deleteButton = document.querySelector('[data-delete]')
+const previousOperandTextElement = document.querySelector('[data-previous]')
+const currentOperandTextElement = document.querySelector('[data-current]')
+
+class Calculator {
+  constructor(previousOperandTextElement, currentOperandTextElement) {
+    this.previousOperandTextElement = previousOperandTextElement
+    this.currentOperandTextElement = currentOperandTextElement
+    this.clear()
+  }
+
+  chooseOperation(operation) {
+
+  }
+
+  appendNumber(number) {
+    if (this.currentOperand.includes(".") && number === ".") return
+
+    this.currentOperand = `${this.currentOperand}${number.toString()}`
+  }
+
+  clear() {
+    this.previousOperand = ''
+    this.currentOperand = ''
+    this.operation = undefined
+  }
   
-  if(currentNumber.length === 0) { return }
-
-  count.push(Number(document.getElementById("total").innerHTML))
-
-  document.getElementById("accumulator").innerHTML += ` ${document.getElementById("total").innerHTML} ${action}`
-  document.getElementById("total").innerHTML = ""
-  count.push(action)
-}
-
-function addComma(){
-  var currentNumber = document.getElementById("total").innerHTML
-
-  if(!currentNumber.includes(".")) {
-    document.getElementById("total").innerHTML += ","
+  updateDisplay() {
+    this.previousOperandTextElement.innerText = this.previousOperand
+    this.currentOperandTextElement.innerText = this.currentOperand
   }
 }
 
-function result() {
-  currentAccum = document.getElementById("accumulator").innerHTML
-  currentNumber = document.getElementById("total").innerHTML
+const calculator = new Calculator(
+  previousOperandTextElement, 
+  currentOperandTextElement
+)
 
-  if (currentAccum[currentAccum.length - 1] === "=" && currentNumber.length > 0) {
-    document.getElementById("total").innerHTML = ProcessAction(Number(currentNumber), saveAction).toString().substring(0, MAX_VISOR_CHAR)
-  }
-
-  if (count.length === 0) { return }
-
-  count.push(Number(document.getElementById("total").innerHTML))
-  document.getElementById("accumulator").innerHTML += ` ${document.getElementById("total").innerHTML} =`
-  ProcessResult()
-}
-
-function ProcessResult(){
-  let action = null
-  let current = null
-
-  let total = 0 
-
-  if (isNaN(count[count.length - 1])){
-    count.pop()
-  }
-
-  count.forEach(n => {
-    if (!isNaN(n)) {
-      if (current == null) {
-        current = n
-      } else {
-        total += ProcessAction(current, n, action)
-        current = null
-      }
-    } else {
-      action = n
-      saveAction = n
-    }
+for (const numberButton of numberButtons){
+  numberButton.addEventListener('click', () => {
+    calculator.appendNumber(numberButton.innerText)
+    calculator.updateDisplay()
   })
-
-  if (current != null) {
-    total = ProcessAction(total, current, action)
-  }
-
-  document.getElementById("total").innerHTML = total.toString().substring(0, MAX_VISOR_CHAR)
-  count = []
-
 }
 
-function ProcessAction(num1, num2, action) {
-  switch (action) {
-    case '+': return num1 + num2
-    case '-': return num1 - num2
-    case '/': return num1 / num2
-    case 'x': return num1 * num2
-  }
-}
+clearButton.addEventListener('click', () => {
+  calculator.clear()
+  calculator.updateDisplay()
+})
 
-function cleanCurrent() {
-  document.getElementById("total").innerHTML = ""
-}
-
-function cleanAll() {
-  document.getElementById("total").innerHTML = ""
-  document.getElementById("accumulator").innerHTML = ""
-  count = []
-}
-
-function percentage(){
-  var currentNumber = document.getElementById("total").innerHTML
-  if (currentNumber != ""){
-    document.getElementById("total").innerHTML = Number(document.getElementById("total").innerHTML) / 100
-  }
-} 
