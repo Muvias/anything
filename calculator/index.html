@@ -1,38 +1,45 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="PT-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <title>Calculator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+
+    <title>Hmmm</title>
 </head>
 <body>
-  <div class="calculator">
-    <div class="visor">
-      <div id="accumulator" class="acc"></div>
-      <div id="total" class="total" hidden></div>
+    <button class="button-popup">Calculadora</button>
+    
+    <div class="popup-wrapper">
+        <div class="grid-container">
+            <div class="popup-close">x</div>
+
+            <div class="output">
+                <div data-previous class="previous-operand"></div>
+                <div data-current class="current-operand">0</div>
+            </div>
+            <button data-all-clear class="twice">AC</button>
+            <button data-delete>DEL</button>
+            <button data-operator class="operator">/</button>
+            <button data-number>1</button>
+            <button data-number>2</button>
+            <button data-number>3</button>
+            <button data-operator class="operator">*</button>
+            <button data-number>4</button>
+            <button data-number>5</button>
+            <button data-number>6</button>
+            <button data-operator class="operator">+</button>
+            <button data-number>7</button>
+            <button data-number>8</button>
+            <button data-number>9</button>
+            <button data-operator class="operator">-</button>
+            <button data-number class="twice">.</button>
+            <button data-number>0</button>
+            <button data-equals class="operator">=</button>
+        </div>
     </div>
-    <div class="numeric action" onclick="cleanAll()">C</div>
-    <div class="numeric action" onclick="cleanCurrent()">CE</div>
-    <div class="numeric action" onclick="percentage()">%</div>
-    <div class="numeric action" onclick="calcAction('/')">/</div>
-    <div class="numeric" onclick="addNumber(9)">9</div>
-    <div class="numeric" onclick="addNumber(8)">8</div>
-    <div class="numeric" onclick="addNumber(7)">7</div>
-    <div class="numeric action" onclick="calcAction('x')">X</div>
-    <div class="numeric" onclick="addNumber(6)">6</div>
-    <div class="numeric" onclick="addNumber(5)">5</div>
-    <div class="numeric" onclick="addNumber(4)">4</div>
-    <div class="numeric action" onclick="calcAction('-')">-</div>
-    <div class="numeric" onclick="addNumber(3)">3</div>
-    <div class="numeric" onclick="addNumber(2)">2</div>
-    <div class="numeric" onclick="addNumber(1)">1</div>
-    <div class="numeric action" onclick="calcAction('+')">+</div>
-    <div class="numeric zero" onclick="addNumber(0)">0</div>
-    <div class="numeric" onclick="addComma()">,</div>
-    <div class="numeric actionResult" onclick="result()">=</div>
-  </div>
-  <script src="script.js"></script>
+
+    <script src="script.js"></script>
 </body>
 </html>
